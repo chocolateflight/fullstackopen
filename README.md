@@ -10,9 +10,14 @@ This part is an overall introduction to the course, focussing on HTTP requests, 
 2. SPA: A sequence diagram depicting the chain of events caused by opening a SPA
 3. New Note: A sequence diagram depicting the chain of events caused by adding a note to a SPA
 
-Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/Part%200)
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part0)
 
 ## Part 1 - Introduction to React
 This part focuses on the React library and some JavaScript Features.
 
 ### Exercises
+1. courseinfo: A simple React Application displaying information
+2. unicafe: A React Application using States
+3. anecdotes: A React Application using multiple States
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part1)
