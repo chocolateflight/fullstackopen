@@ -1,0 +1,10 @@
+note over browser:
+user creates new spa note
+end note
+
+browser->server: HTTP POST (https://studies.cs.helsinki.fi/exampleapp/new_note_spa)
+server->browser: HTTP status 201
+
+note over browser:
+new note is displayed
+end note

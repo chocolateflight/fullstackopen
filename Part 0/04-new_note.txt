@@ -1,0 +1,29 @@
+note over browser:
+user creates new note
+end note
+
+browser->server: HTTP POST (https://studies.cs.helsinki.fi/exampleapp/new_note)
+
+note over server:
+server replies
+end note
+
+server->browser: HTTP status 302
+
+note over browser:
+browser requests site again
+end note
+
+browser->server: HTML GET notes (https://studies.cs.helsinki.fi/exampleapp/notes)
+server->browser: HTML status 200 - HTML-code
+browser->server: HTML GET main.css (https://studies.cs.helsinki.fi/exampleapp/main.css)
+server->browser: HTML status 200 - main.css
+browser->server: HTML get main.js (https://studies.cs.helsinki.fi/exampleapp/main.js)
+server->browser: HTML status 200 - main.js
+
+note over browser:
+JS execution
+end note
+
+browser->server: HTML GET data (https://studies.cs.helsinki.fi/exampleapp/data.json)
+server->browser: HTML status 200 - data.json

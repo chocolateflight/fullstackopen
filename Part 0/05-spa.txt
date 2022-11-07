@@ -1,0 +1,17 @@
+note over browser:
+user opens the SPA
+end note
+
+browser->server: HTTP GET HTML (https://studies.cs.helsinki.fi/exampleapp/spa)
+server->browser: HTTP status 200 - html-code
+browser->server: HTTP GET main.css (https://studies.cs.helsinki.fi/exampleapp/main.css)
+server->browser: HTTP status 200 - main.css
+browser->server: HTTP GET spa.js (https://studies.cs.helsinki.fi/exampleapp/spa.js)
+server->browser: HTTP status 200 - spa.js
+
+note over browser:
+JS execution
+end note
+
+browser->server: HTTP get data (https://studies.cs.helsinki.fi/exampleapp/data.json)
+server->browser: HTTP status 200 - data.json
