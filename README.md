@@ -6,6 +6,8 @@ This part is an overall introduction to the course, focussing on HTTP requests, 
 
 ### Exercises
 
-1. New Note Diagram:
-2. SPA: 
-3. New Note: 
+1. New Note Diagram: A sequence diagram depicting the chain of events caused by adding a note to a page
+2. SPA: A sequence diagram depicting the chain of events caused by opening a SPA
+3. New Note: A sequence diagram depicting the chain of events caused by adding a note to a SPA
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/Part%200)
