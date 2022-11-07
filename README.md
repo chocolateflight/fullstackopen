@@ -11,3 +11,8 @@ This part is an overall introduction to the course, focussing on HTTP requests, 
 3. New Note: A sequence diagram depicting the chain of events caused by adding a note to a SPA
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/Part%200)
+
+## Part 1 - Introduction to React
+This part focuses on the React library and some JavaScript Features.
+
+### Exercises
