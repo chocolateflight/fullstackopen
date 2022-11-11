@@ -19,6 +19,7 @@ const App = () => {
   // LOADS INITIAL SET OF DATA
   useEffect(() => {
     getAll().then((response) => {
+      console.log(response)
       const data = response.data;
       setPersons(data);
     });
