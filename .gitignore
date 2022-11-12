@@ -10,6 +10,7 @@
 /part2/courseinfo/node_modules
 /part3/phonebook/node_modules
 /part3/exercise
+/part4/node_modules
 /.pnp
 .pnp.js
 
@@ -22,6 +23,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
