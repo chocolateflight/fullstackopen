@@ -37,3 +37,10 @@ This part focuses on how to render data collections, submitting data using React
 3. phonebook: A phonebook application connected to a json-server with dynamic styling for notifications
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part2)
+
+## Part 3 - Programming a server with NodeJS and Express
+
+This part focuses on the backend with a simple REST API in Node.js using the Express library and MongoDB.
+
+- Solution Repository for Part 3: [GitHub](https://github.com/chocolateflight/fullstackopen-part3)
+- Solution App for Part 3: [Link](https://angry-hoodie-toad.cyclic.app/)
