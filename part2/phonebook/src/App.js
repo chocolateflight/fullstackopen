@@ -33,7 +33,9 @@ const App = () => {
       number: newNumber,
     };
 
-    const filteredPerson = persons.filter((person) => person.name === newName);
+    const filteredPerson = persons.filter(
+      (person) => person.name.toUpperCase() === newName.toUpperCase()
+    );
     if (filteredPerson.length > 0) {
       if (
         window.confirm(
@@ -49,12 +51,16 @@ const App = () => {
       return;
     }
 
-    createPerson(nameObject).then((response) => {
-      setPersons(persons.concat(response.data));
-      setNotification({ message: `Added ${newName}`, error: 'success' });
-      setNewName('');
-      setNewNumber('');
-    });
+    createPerson(nameObject)
+      .then((response) => {
+        setPersons(persons.concat(response.data));
+        setNotification({ message: `Added ${newName}`, error: 'success' });
+        setNewName('');
+        setNewNumber('');
+      })
+      .catch((error) => {
+        setNotification({ message: error.response.data.error, error: 'error' });
+      });
   };
 
   // DELETE PERSON FROM SERVER AND STATE
