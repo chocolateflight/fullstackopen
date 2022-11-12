@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'https://angry-hoodie-toad.cyclic.app/api/v1/persons';
+const baseUrl = '/api/v1/persons';
 
 const getAll = () => {
   return axios.get(baseUrl);
