@@ -59,7 +59,7 @@ const App = () => {
 
   // DELETE PERSON FROM SERVER AND STATE
   const deleteName = (deleteId) => {
-    const filter = persons.filter((person) => person.id === +deleteId)[0];
+    const filter = persons.filter((person) => person.id === deleteId)[0];
     const index = persons.indexOf(filter);
     if (window.confirm(`Do you really want to delete ${filter.name}?`)) {
       deletePerson(deleteId)
