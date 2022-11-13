@@ -4,7 +4,6 @@ module.exports = {
     commonjs: true,
     es2021: true,
     jest: true,
-    process: true,
   },
   extends: 'eslint:recommended',
   overrides: [],
@@ -15,5 +14,6 @@ module.exports = {
     indent: ['error', 2],
     quotes: ['error', 'single'],
     semi: ['warn', 'always'],
+    'no-console': 'error',
   },
 };

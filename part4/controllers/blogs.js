@@ -1,14 +1,13 @@
 const blogsRouter = require('express').Router();
-const blog = require('../models/blog');
 const Blog = require('../models/blog');
-const { blogs } = require('../tests/test_helper');
+const User = require('../models/user');
 
 /* -------------------------------------------------------------------------- */
 
 // GET
 
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 });
   response.json(blogs);
 });
 
@@ -30,7 +29,17 @@ blogsRouter.get('/:id', async (request, response, next) => {
 // POST
 
 blogsRouter.post('/', async (request, response, next) => {
-  const blog = new Blog(request.body);
+  const body = request.body;
+  let user = await User.find({});
+  user = user[0];
+
+  const blog = new Blog({
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    user: user,
+    likes: body.likes,
+  });
 
   if (!blog.likes) {
     blog.likes = 0;
@@ -38,6 +47,8 @@ blogsRouter.post('/', async (request, response, next) => {
 
   try {
     const savedBlog = await blog.save();
+    user.blogs = user.blogs.concat(savedBlog.id);
+    await user.save();
     response.status(201).json(savedBlog);
   } catch (error) {
     next(error);
@@ -66,8 +77,6 @@ blogsRouter.put('/:id', async (request, response, next) => {
   if (!blog.likes) {
     blog.likes = 0;
   }
-
-  console.log(blog);
 
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
