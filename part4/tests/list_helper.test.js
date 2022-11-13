@@ -53,7 +53,7 @@ const blogs = [
 
 /* -------------------------------------------------------------------------- */
 
-test('dummy returns one', () => {
+test.skip('dummy returns one', () => {
   const blogs = [];
 
   const result = listHelper.dummy(blogs);
@@ -74,7 +74,7 @@ describe('total likes', () => {
     },
   ];
 
-  test('when list has only one blog, equals the likes of that', () => {
+  test.skip('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog);
     expect(result).toBe(5);
   });
@@ -83,7 +83,7 @@ describe('total likes', () => {
 /* -------------------------------------------------------------------------- */
 
 describe('most likes', () => {
-  test('out of a list with multiple blogs', () => {
+  test.skip('out of a list with multiple blogs', () => {
     const result = listHelper.favoriteBlogs(blogs);
     expect(result).toStrictEqual({
       _id: '5a422b3a1b54a676234d17f9',
@@ -99,7 +99,7 @@ describe('most likes', () => {
 /* -------------------------------------------------------------------------- */
 
 describe('author who has written the most blogs', () => {
-  test('out of a list with multiple blogs', () => {
+  test.skip('out of a list with multiple blogs', () => {
     const result = listHelper.mostBlogs(blogs);
     expect(result).toStrictEqual({
       author: 'Robert C. Martin',
@@ -111,7 +111,7 @@ describe('author who has written the most blogs', () => {
 /* -------------------------------------------------------------------------- */
 
 describe('author who has received the largest amounts of total likes', () => {
-  test('out of a list with multiple blogs', () => {
+  test.skip('out of a list with multiple blogs', () => {
     const result = listHelper.mostLikes(blogs);
     expect(result).toStrictEqual({
       author: 'Edsger W. Dijkstra',
