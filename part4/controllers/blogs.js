@@ -1,6 +1,7 @@
 const blogsRouter = require('express').Router();
 const blog = require('../models/blog');
 const Blog = require('../models/blog');
+const { blogs } = require('../tests/test_helper');
 
 /* -------------------------------------------------------------------------- */
 
@@ -55,5 +56,32 @@ blogsRouter.delete('/:id', async (request, response, next) => {
     next(error);
   }
 });
+
+/* -------------------------------------------------------------------------- */
+
+// PUT
+blogsRouter.put('/:id', async (request, response, next) => {
+  const blog = request.body;
+
+  if (!blog.likes) {
+    blog.likes = 0;
+  }
+
+  console.log(blog);
+
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
+      new: true,
+      runValidators: true,
+      context: 'query',
+    });
+
+    response.json(updatedBlog.toJSON());
+  } catch (error) {
+    next(error);
+  }
+});
+
+/* -------------------------------------------------------------------------- */
 
 module.exports = blogsRouter;
