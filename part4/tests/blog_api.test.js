@@ -5,11 +5,35 @@ const app = require('../app');
 const api = supertest(app);
 
 const Blog = require('../models/blog');
+const User = require('../models/user');
 const helper = require('./test_helper');
 
 beforeEach(async () => {
   await Blog.deleteMany({});
-  await Blog.insertMany(helper.blogs);
+  let user = await User.find({});
+  user = user[0];
+
+  user.blogs = [];
+  await user.save();
+
+  const blogs = helper.blogs.map(
+    (blog) =>
+      new Blog({
+        title: blog.title,
+        author: blog.author,
+        url: blog.url,
+        user: user,
+        likes: blog.likes,
+      })
+  );
+
+  const promiseArray = blogs.map(async (blog) => {
+    await blog.save();
+    user.blogs = user.blogs.concat(blog.id);
+  });
+  
+  await Promise.all(promiseArray);
+  await user.save();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -33,6 +57,14 @@ describe('Accessing all already saved blogs', () => {
     const response = await api.get('/api/v1/blogs');
     const blogs = response.body.map((r) => r.title);
     expect(blogs).toContain('First class tests');
+  });
+
+  test('the number of referenced blogs of users matches the total number of blogs', async () => {
+    const responseBlogs = await api.get('/api/v1/blogs');
+    const responseUsers = await api.get('/api/v1/users');
+    const blogsInUsers = responseUsers.body.map((user) => user.blogs).flat();
+
+    expect(blogsInUsers).toHaveLength(responseBlogs.body.length);
   });
 });
 
