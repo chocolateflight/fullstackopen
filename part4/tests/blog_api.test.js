@@ -229,7 +229,8 @@ describe('Updating blogs', () => {
 // Test Delete
 
 describe('Deleting blogs', () => {
-  test('a blog can be deleted', async () => {
+  test.only('a blog can be deleted', async () => {
+    const usersAtStart = await helper.usersInDb();
     const blogsAtStart = await helper.blogsInDb();
     const blogToDelete = blogsAtStart[0];
 
@@ -239,10 +240,17 @@ describe('Deleting blogs', () => {
       .expect(204);
 
     const blogsAtEnd = await helper.blogsInDb();
+    const usersAtEnd = await helper.usersInDb();
     expect(blogsAtEnd).toHaveLength(helper.blogs.length - 1);
 
     const blogs = blogsAtEnd.map((b) => b.title);
     expect(blogs).not.toContain(blogToDelete.title);
+
+    const blogsInUsersAtStart = usersAtStart.map((user) => user.blogs).flat();
+    const blogsInUsersAtEnd = usersAtEnd.map((user) => user.blogs).flat();
+
+    expect(blogsInUsersAtStart).toHaveLength(blogsInUsersAtEnd.length + 1);
+    expect(blogsInUsersAtEnd).toHaveLength(blogs.length);
   }, 100000);
 
   test('fails with 400 if ID is invalid', async () => {

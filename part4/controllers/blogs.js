@@ -67,6 +67,9 @@ blogsRouter.delete(
 
     if (blog.user._id.toString() === user._id.toString()) {
       await Blog.findByIdAndRemove(request.params.id);
+      const index = user.blogs.indexOf(request.params.id);
+      user.blogs.splice(index, 1);
+      await user.save();
       response.status(204).end();
     } else {
       return response.status(401).json({ error: 'unauthorized' });
