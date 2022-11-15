@@ -44,3 +44,13 @@ This part focuses on the backend with a simple REST API in Node.js using the Exp
 
 - Solution Repository for Part 3: [GitHub](https://github.com/chocolateflight/fullstackopen-part3)
 - Solution App for Part 3: [Link](https://angry-hoodie-toad.cyclic.app/)
+
+## Part 4 - Testing Express servers, user administration
+
+This part focuses on writing unit and integration tests using the Jest library. It also looks at implementing user authentication and authorization using JWT.
+
+### Exercises
+
+- bloglist: A backend application with the functionality of adding, updating and deleting blogs. Each functionality requires user authentication using JWT.
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part4)
