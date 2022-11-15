@@ -4,11 +4,11 @@ GET http://localhost:3001/api/v1/blogs/63729da1fad1f2c6669255c6 HTTP/1.1
 ### POST Request
 POST http://localhost:3001/api/v1/blogs HTTP/1.1
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MzcxMDI4MTNjZGJlNzE5YjM2ZTk1YjMiLCJpYXQiOjE2Njg0NTUyODcsImV4cCI6MTY2ODQ1ODg4N30.u0zSMLHuQboYh8IumES-nIoz09zgNgLm8snM5OL_bL8
+Authorization: bearer 
 
 {
-    "title": "Created by Mluukkai",
-    "author": "Marc",
+    "title": "Created by Hellas: 3",
+    "author": "Arto Hellas",
     "url": "https://www.google.com",
     "likes": 20
 }
@@ -16,7 +16,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sd
 ### PUT Request
 PUT http://localhost:3001/api/v1/blogs/63728fe5d1fc749d89b95d10 HTTP/1.1
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGxhcyIsImlkIjoiNjM3MTAyNmUzY2RiZTcxOWIzNmU5NWIwIiwiaWF0IjoxNjY4NDUyMzA5LCJleHAiOjE2Njg0NTU5MDl9.f5JkWoywl_XIk6qWPA7j0gKU-GE-5meiInS5XoM-Qek
+Authorization: bearer 
 
 {
     "title": "This has been updated by Hellas",
@@ -27,4 +27,4 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhlb
 
 ### DELETE Request
 DELETE http://localhost:3001/api/v1/blogs/63728fe5d1fc989b95d10 HTTP/1.1
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MzcxMDI4MTNjZGJlNzE5YjM2ZTk1YjMiLCJpYXQiOjE2Njg0NTI0NDYsImV4cCI6MTY2ODQ1NjA0Nn0.ADtWCvaPe2JfKLGUxH85fddkg8T38Ubui7K_RLTiZJc
+Authorization: bearer 
