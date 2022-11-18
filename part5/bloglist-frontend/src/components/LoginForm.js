@@ -14,17 +14,15 @@ const LoginForm = (props) => {
   };
 
   return (
-    <>
-      <form onSubmit={submitHandler}>
-        <span>
-          Username: <input type='text' ref={inputUsernameRef} />
-        </span>
-        <div>
-          Password: <input type='text' ref={inputPasswordRef} />
-        </div>
-        <button>Login</button>
-      </form>
-    </>
+    <form onSubmit={submitHandler}>
+      <span>
+        Username: <input type='text' ref={inputUsernameRef} />
+      </span>
+      <div>
+        Password: <input type='password' ref={inputPasswordRef} />
+      </div>
+      <button>Login</button>
+    </form>
   );
 };
 
