@@ -7,22 +7,22 @@ Content-Type: application/json
 Authorization: bearer 
 
 {
-    "title": "Created by Hellas: 3",
-    "author": "Arto Hellas",
-    "url": "https://www.google.com",
+    "title": "",
+    "author": "",
+    "url": "",
     "likes": 20
 }
 
 ### PUT Request
-PUT http://localhost:3001/api/v1/blogs/63728fe5d1fc749d89b95d10 HTTP/1.1
+PUT http://localhost:3001/api/v1/blogs/63776ed1983b6cede5bc82f9 HTTP/1.1
 Content-Type: application/json
-Authorization: bearer 
+Authorization: bearer
 
 {
-    "title": "This has been updated by Hellas",
-    "author": "Marc",
-    "url": "https://www.google.com",
-    "likes": 35
+    "title": "",
+    "author": "",
+    "url": "",
+    "likes": 1
 }
 
 ### DELETE Request
