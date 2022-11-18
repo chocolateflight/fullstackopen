@@ -23,8 +23,8 @@ const Blog = (props) => {
   };
 
   const deleteHandler = () => {
-    props.onDelete(props.blog.id)
-  }
+    props.onDelete(props.blog.id);
+  };
 
   return (
     <div style={blogStyle}>
