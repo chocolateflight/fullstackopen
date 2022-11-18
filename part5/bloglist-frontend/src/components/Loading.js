@@ -1,8 +1,10 @@
 import "./Loading.css"
 
-const Loading = () => {
+const Loading = (props) => {
   return (
-    <div className="loading"></div>
+    <>
+      {props.isLoading ? <div className="loading"></div> : props.children}
+    </>
   )
 }
 

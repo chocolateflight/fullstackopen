@@ -86,8 +86,14 @@ blogsRouter.put(
   middleware.tokenValidation,
   async (request, response) => {
     const user = request.user;
-    const newBlog = request.body;
     const oldBlog = await Blog.findById(request.params.id);
+    const newBlog = {
+      title: request.body.title,
+      author: request.body.author,
+      url: request.body.url,
+      user: oldBlog.user,
+      likes: request.body.likes,
+    };
 
     if (!oldBlog) {
       return response.status(404).end();
@@ -97,7 +103,12 @@ blogsRouter.put(
       newBlog.likes = 0;
     }
 
-    if (oldBlog.user._id.toString() === user._id.toString()) {
+    let differences = [];
+    Object.keys(newBlog).forEach((key) => {
+      newBlog[key] !== oldBlog[key] ? differences.push(key) : null;
+    });
+
+    if (differences.length === 1 && differences[0] === 'likes') {
       const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, newBlog, {
         new: true,
         runValidators: true,
@@ -106,7 +117,17 @@ blogsRouter.put(
 
       response.json(updatedBlog.toJSON());
     } else {
-      return response.status(401).json({ error: 'unauthorized' });
+      if (oldBlog.user._id.toString() === user._id.toString()) {
+        const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, newBlog, {
+          new: true,
+          runValidators: true,
+          context: 'query',
+        });
+
+        response.json(updatedBlog.toJSON());
+      } else {
+        return response.status(401).json({ error: 'unauthorized' });
+      }
     }
   }
 );

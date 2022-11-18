@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Blog from './components/Blog';
 import LoginForm from './components/LoginForm';
 import NewBlog from './components/NewBlog';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
-import { getAllBlogs, setToken, createBlog } from './services/blogs';
+import Togglable from './components/Togglable';
+import {
+  getAllBlogs,
+  setToken,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+} from './services/blogs';
 import { login } from './services/logins';
 
 const App = () => {
@@ -49,6 +56,7 @@ const App = () => {
       const user = await login(data);
       window.localStorage.setItem('loggedInUser', JSON.stringify(user));
       setUser(user);
+      setToken(user.token);
       setIsLoading(false);
       setNotification({
         message: `${user.name} was successfully logged in`,
@@ -85,14 +93,47 @@ const App = () => {
     }
   };
 
+  const handleLike = async (likedBlog) => {
+    likedBlog.likes++;
+    try {
+      setIsLoading(true);
+      await updateBlog(likedBlog);
+      await fetchNewData();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      window.alert('Unknown Error');
+    }
+  };
+
+  const handleDeleteBlog = async (id) => {
+    try {
+      if (window.confirm('Are you sure that you want to delete this blog?')) {
+        setIsLoading(true);
+        await deleteBlog(id);
+        await fetchNewData();
+        setIsLoading(false);
+        setNotification({ message: 'Blog was successfully deleted', error: 'success' });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      window.alert('Unknown Error');
+    }
+  };
+
+  /* ---------- useRef ---------- */
+  const loginFormRef = useRef();
+
   /* ---------- Return Statements ---------- */
 
   if (user === null) {
     return (
       <div>
         <h2>log in to application</h2>
-        <Notification notification={notification} />
-        {isLoading ? <Loading /> : <LoginForm onLogin={handleLogin} />}
+        <Loading isLoading={isLoading}>
+          <Notification notification={notification} />
+          <LoginForm onLogin={handleLogin} />
+        </Loading>
       </div>
     );
   }
@@ -100,28 +141,37 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Notification notification={notification} />
-          <span>{user.name} logged in </span>
-          <button style={{ marginBottom: '20px' }} onClick={handleLogout}>
-            Logout
-          </button>
+
+      <Loading isLoading={isLoading}>
+        <Notification notification={notification} />
+
+        <span>{user.name} logged in </span>
+
+        <button style={{ marginBottom: '20px' }} onClick={handleLogout}>
+          Logout
+        </button>
+
+        <Togglable
+          showButtonLabel='Create new note'
+          hideButtonLabel='Cancel'
+          ref={loginFormRef}>
           <NewBlog onNewBlog={handleNewBlog} />
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <>
-              {' '}
-              {blogs.map((blog) => (
-                <Blog key={blog.id} blog={blog} />
-              ))}{' '}
-            </>
-          )}
-        </>
-      )}
+        </Togglable>
+
+        <div style={{ marginTop: '10px' }}>
+          {blogs
+            .sort((a, b) => b.likes - a.likes)
+            .map((blog) => (
+              <Blog
+                key={blog.id}
+                blog={blog}
+                user={user}
+                onLike={handleLike}
+                onDelete={handleDeleteBlog}
+              />
+            ))}
+        </div>
+      </Loading>
     </div>
   );
 };
