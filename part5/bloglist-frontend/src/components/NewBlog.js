@@ -17,7 +17,7 @@ const NewBlog = (props) => {
   };
 
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div>
       <form onSubmit={submitHandler}>
         <div>
           Title: <input type='text' ref={inputTitleRef} />
