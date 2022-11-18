@@ -1,7 +1,7 @@
 const logger = require('./logger');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-require('express-async-errors')
+require('express-async-errors');
 
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method);
@@ -24,7 +24,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(401).json({
       error: 'invalid token',
     });
-  } else if (error.name === 'TokenExipredError') {
+  } else if (error.name === 'TokenExpiredError') {
     return response.status(401).json({
       error: 'token expired',
     });
