@@ -27,16 +27,20 @@ const Blog = (props) => {
   };
 
   return (
-    <div style={blogStyle}>
-      <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{props.blog.title}</span>
-      <span>by {props.blog.author}</span>
+    <div style={blogStyle} className='blog'>
+      <div >
+        <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>
+          {props.blog.title}
+        </span>
+        <span> by {props.blog.author}</span>
+      </div>
       <span>
         <Togglable ref={viewDetailsRef} showButtonLabel='view' hideButtonLabel='hide'>
-          <div>
+          <div className='blog-details'>
             <div>URL: {props.blog.url}</div>
             <div>
               <span>Likes: {likes} </span>
-              <button onClick={addLikeHandler}>Like</button>
+              <button onClick={addLikeHandler} className='btn-like'>Like</button>
             </div>
             <div>Author: {props.blog.author}</div>
             {props.blog.user.username === props.user.username ? (

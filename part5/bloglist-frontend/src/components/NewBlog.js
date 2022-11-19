@@ -28,7 +28,7 @@ const NewBlog = (props) => {
         <div>
           Url: <input type='text' ref={inputUrlRef} />
         </div>
-        <button style={{ marginTop: '5px' }}>Create</button>
+        <button style={{ marginTop: '5px' }} className='btn-submit'>Create</button>
       </form>
     </div>
   );
