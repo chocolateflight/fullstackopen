@@ -20,15 +20,17 @@ const NewBlog = (props) => {
     <div>
       <form onSubmit={submitHandler}>
         <div>
-          Title: <input type='text' ref={inputTitleRef} />
+          Title: <input id='title' type='text' ref={inputTitleRef} />
         </div>
         <div>
-          Author: <input type='text' ref={inputAuthorRef} />
+          Author: <input id='author' type='text' ref={inputAuthorRef} />
         </div>
         <div>
-          Url: <input type='text' ref={inputUrlRef} />
+          Url: <input id='url' type='text' ref={inputUrlRef} />
         </div>
-        <button style={{ marginTop: '5px' }} className='btn-submit'>Create</button>
+        <button id='btn-submit' className='btn-submit' style={{ marginTop: '5px' }}>
+          Create
+        </button>
       </form>
     </div>
   );

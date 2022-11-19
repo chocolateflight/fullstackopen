@@ -28,7 +28,7 @@ const Blog = (props) => {
 
   return (
     <div style={blogStyle} className='blog'>
-      <div >
+      <div>
         <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>
           {props.blog.title}
         </span>
@@ -40,11 +40,15 @@ const Blog = (props) => {
             <div>URL: {props.blog.url}</div>
             <div>
               <span>Likes: {likes} </span>
-              <button onClick={addLikeHandler} className='btn-like'>Like</button>
+              <button onClick={addLikeHandler} className='btn-like' id='btn-like'>
+                Like
+              </button>
             </div>
             <div>Author: {props.blog.author}</div>
             {props.blog.user.username === props.user.username ? (
-              <button onClick={deleteHandler}>Remove</button>
+              <button id='btn-remove' onClick={deleteHandler}>
+                Remove
+              </button>
             ) : null}
           </div>
         </Togglable>

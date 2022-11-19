@@ -30,8 +30,12 @@ app.use(middleware.requestLogger);
 
 app.use('/api/v1/login', loginRouter);
 app.use('/api/v1/users', usersRouter);
-
 app.use('/api/v1/blogs', blogsRouter);
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing');
+  app.use('/api/v1/testing', testingRouter);
+}
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
