@@ -54,3 +54,13 @@ This part focuses on writing unit and integration tests using the Jest library. 
 - bloglist: A backend application with the functionality of adding, updating and deleting blogs. Each functionality requires user authentication using JWT.
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part4)
+
+## Part 5 - Testin React Apps
+
+This part focuses on connecting the Frontend with the Backend, as well as testing React Apps with Jest and Cypress. 
+
+### Exercises
+
+- bloglist: A React Frontend application connected to the backend application of Part 4, completed with tests.
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part5/bloglist-frontend)
