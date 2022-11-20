@@ -1,26 +1,39 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { likeAnecdote } from '../reducers/anecdoteReducer';
+import { likeAnecdote } from '../features/anecdotesSlice';
+import { showNotification } from '../features/notificationSlice';
 
 const Anecdotes = () => {
-  const anecdotes = useSelector((state) => state);
+  const [timeoutId, setTimeoutId] = useState();
+  const { anecdoteObjects } = useSelector((store) => store.anecdotes);
+  const { filter } = useSelector((store) => store.filter);
   const dispatch = useDispatch();
 
-  const vote = (id) => {
+  const vote = (id, content) => {
+    clearTimeout(timeoutId);
     console.log('vote', id);
     dispatch(likeAnecdote(id));
+    dispatch(showNotification(`you voted for "${content}"`));
+    setTimeoutId(
+      setTimeout(() => {
+        dispatch(showNotification(''));
+      }, 5000)
+    );
   };
 
   return (
     <div>
-      <h2>Anecdotes</h2>
-      {anecdotes
+      {[...anecdoteObjects]
         .sort((anecdote1, anecdote2) => anecdote2.votes - anecdote1.votes)
+        .filter((anecdote) =>
+          anecdote.content.toUpperCase().includes(filter.toUpperCase())
+        )
         .map((anecdote) => (
           <div key={anecdote.id}>
             <div>{anecdote.content}</div>
             <div>
               has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
+              <button onClick={() => vote(anecdote.id, anecdote.content)}>vote</button>
             </div>
           </div>
         ))}

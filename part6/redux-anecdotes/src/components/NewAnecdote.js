@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { createAnecdote } from '../reducers/anecdoteReducer';
+// import { createAnecdote } from '../reducers/anecdoteReducer';
+import { newAnecdote } from '../features/anecdotesSlice';
 
 const NewAnecdote = () => {
   const inputAnecdoteRef = useRef();
@@ -8,8 +9,9 @@ const NewAnecdote = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const newAnecdote = inputAnecdoteRef.current.value;
-    dispatch(createAnecdote(newAnecdote));
+    const newAnecdoteText = inputAnecdoteRef.current.value;
+    dispatch(newAnecdote(newAnecdoteText));
+    inputAnecdoteRef.current.value = '';
   };
 
   return (
