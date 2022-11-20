@@ -55,7 +55,7 @@ This part focuses on writing unit and integration tests using the Jest library. 
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part4)
 
-## Part 5 - Testin React Apps
+## Part 5 - Testing React Apps
 
 This part focuses on connecting the Frontend with the Backend, as well as testing React Apps with Jest and Cypress. 
 
@@ -64,3 +64,14 @@ This part focuses on connecting the Frontend with the Backend, as well as testin
 - bloglist: A React Frontend application connected to the backend application of Part 4, completed with tests.
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part5/bloglist-frontend)
+
+## Part 6 - State management with Redux
+
+This part focuses on moving state management to the Redux library. It looks into react-redux as well as Redux toolkit, focuses on the useSelector and useDispatch hook and also takes a quick look at the older connect system.
+
+### Exercises
+
+- unicafe-redux: A simple React app with a vanilla Redux State Management system
+- redux-anecdotes: A React app using Redux Toolkit as a state management system. One of the components uses the older connect system.
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part6)
