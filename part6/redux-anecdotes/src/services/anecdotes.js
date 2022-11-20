@@ -12,4 +12,11 @@ const pushAnecdote = async (newAnecdote) => {
   return response.data;
 };
 
-export { getAllAnecdotes, pushAnecdote };
+const likeAnecdoteDB = async (id) => {
+  const anecdoteToLike = await axios.get(`${baseUrl}/${id}`);
+  const newLikes = anecdoteToLike.data.votes + 1;
+  const response = await axios.patch(`${baseUrl}/${id}`, { votes: newLikes });
+  return response.data;
+};
+
+export { getAllAnecdotes, pushAnecdote, likeAnecdoteDB };

@@ -1,24 +1,15 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { likeAnecdote } from '../features/anecdotesSlice';
-import { showNotification } from '../features/notificationSlice';
+import { sendLike } from '../features/anecdotesSlice';
+import { setNotification } from '../features/notificationSlice';
 
 const Anecdotes = () => {
-  const [timeoutId, setTimeoutId] = useState();
   const anecdoteObjects = useSelector((store) => store.anecdotes);
   const { filter } = useSelector((store) => store.filter);
   const dispatch = useDispatch();
 
   const vote = (id, content) => {
-    clearTimeout(timeoutId);
-    console.log('vote', id);
-    dispatch(likeAnecdote(id));
-    dispatch(showNotification(`you voted for "${content}"`));
-    setTimeoutId(
-      setTimeout(() => {
-        dispatch(showNotification(''));
-      }, 5000)
-    );
+    dispatch(sendLike(id));
+    dispatch(setNotification(`you voted for "${content}"`, 5));
   };
 
   return (

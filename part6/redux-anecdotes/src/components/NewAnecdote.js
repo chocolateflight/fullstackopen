@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { newAnecdote } from '../features/anecdotesSlice';
-import { pushAnecdote } from '../services/anecdotes';
+import { createAnecdote } from '../features/anecdotesSlice';
 
 const NewAnecdote = () => {
   const inputAnecdoteRef = useRef();
@@ -10,8 +9,7 @@ const NewAnecdote = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const newAnecdoteText = inputAnecdoteRef.current.value;
-    const newAnecdoteDB = await pushAnecdote(newAnecdoteText);
-    dispatch(newAnecdote(newAnecdoteDB));
+    dispatch(createAnecdote(newAnecdoteText));
     inputAnecdoteRef.current.value = '';
   };
 
