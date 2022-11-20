@@ -5,7 +5,7 @@ import { showNotification } from '../features/notificationSlice';
 
 const Anecdotes = () => {
   const [timeoutId, setTimeoutId] = useState();
-  const { anecdoteObjects } = useSelector((store) => store.anecdotes);
+  const anecdoteObjects = useSelector((store) => store.anecdotes);
   const { filter } = useSelector((store) => store.filter);
   const dispatch = useDispatch();
 
