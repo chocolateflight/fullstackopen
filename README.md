@@ -75,3 +75,16 @@ This part focuses on moving state management to the Redux library. It looks into
 - redux-anecdotes: A React app using Redux Toolkit as a state management system. One of the components uses the older connect system.
 
 Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part6)
+
+## Part 7 - React Router, Custom Hooks, Styling App with CSS and Webpack
+
+This part focuses on working with React Router v6, creating Custom Hooks and some theoretical details about styling a React App and working with Webpack
+
+### Exercises
+
+- routed-anecdotes: React Router v6 implementation in a simple React App
+- country-hook: Implementation of a custom hook into one of the previous exercises
+- ultimate-hook: Implementation of a custom hook to handle HTTP requests
+- bloglist: Reworked application from Part 5, now using Redux and React Router
+
+Solution folder: [Link](https://github.com/chocolateflight/fullstackopen/tree/main/part7)
