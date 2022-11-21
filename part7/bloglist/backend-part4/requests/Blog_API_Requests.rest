@@ -1,0 +1,30 @@
+### GET Request
+GET http://localhost:3001/api/v1/blogs/63729da1fad1f2c6669255c6 HTTP/1.1
+
+### POST Request
+POST http://localhost:3001/api/v1/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: bearer 
+
+{
+    "title": "",
+    "author": "",
+    "url": "",
+    "likes": 20
+}
+
+### PUT Request
+PUT http://localhost:3001/api/v1/blogs/63776ed1983b6cede5bc82f9 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer
+
+{
+    "title": "",
+    "author": "",
+    "url": "",
+    "likes": 1
+}
+
+### DELETE Request
+DELETE http://localhost:3001/api/v1/blogs/63728fe5d1fc989b95d10 HTTP/1.1
+Authorization: bearer 

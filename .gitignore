@@ -15,6 +15,10 @@
 /part5/bloglist-frontend/node_modules
 /part6/redux-anecdotes/node_modules
 /part6/unicafe-redux/node_modules
+/part7/routed-anecdotes/node_modules
+/part7/country-hool/node_modules
+/part7/bloglist/backend-part4/node_modules
+/part7/bloglist/frontend-part5/node_modules
 /.pnp
 .pnp.js
 
