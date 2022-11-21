@@ -12,7 +12,7 @@ describe('Blog App', () => {
       cy.visit('http://localhost:3000');
     });
 
-    describe.skip('not logged in', () => {
+    describe('not logged in', () => {
       it('front page can be opened', () => {
         cy.contains('log in to application');
         cy.contains('Username');
@@ -24,11 +24,11 @@ describe('Blog App', () => {
         cy.get('#username').type('test');
         cy.get('#password').type('test');
         cy.get('#btn-login').click();
-        cy.contains('Sir Test II logged in');
+        cy.contains('Sir Test was successfully logged in');
       });
     });
 
-    describe('when logged in', () => {
+    describe.skip('when logged in', () => {
       beforeEach(() => {
         cy.login({ username: 'test', password: 'test' });
       });

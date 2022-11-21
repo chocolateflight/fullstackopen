@@ -1,124 +1,53 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Blog from './components/Blog';
 import LoginForm from './components/LoginForm';
 import NewBlog from './components/NewBlog';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
 import Togglable from './components/Togglable';
-import {
-  getAllBlogs,
-  setToken,
-  createBlog,
-  updateBlog,
-  deleteBlog,
-} from './services/blogs';
-import { login } from './services/logins';
+import { initializeBlogs, newBlog, likeBlog, destroyBlog } from './features/blogSlice';
+import { handleUserLogin, initializeUser, handleUserLogout } from './features/userSlice';
 
 const App = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [notification, setNotification] = useState({
-    message: null,
-    error: null,
-  });
-
-  /* ---------- Helper Functions ---------- */
-  const fetchNewData = async () => {
-    setIsLoading(true);
-    const blogs = await getAllBlogs();
-    setIsLoading(false);
-    setBlogs(blogs);
-  };
+  const dispatch = useDispatch();
+  const { blogList } = useSelector((store) => store.blogs);
+  const { notification } = useSelector((store) => store.notifications);
+  const { user } = useSelector((store) => store.user);
 
   /* ---------- useEffect ---------- */
 
   useEffect(() => {
     if (user) {
-      fetchNewData();
+      dispatch(initializeBlogs());
     }
   }, [user]);
 
   useEffect(() => {
-    const loggedInUserStorage = window.localStorage.getItem('loggedInUser');
-    if (loggedInUserStorage) {
-      const user = JSON.parse(loggedInUserStorage);
-      setUser(user);
-      setToken(user.token);
-    }
+    dispatch(initializeUser());
   }, []);
 
   /* ---------- Event Handlers ---------- */
 
   const handleLogin = async (data) => {
-    try {
-      setIsLoading(true);
-      const user = await login(data);
-      window.localStorage.setItem('loggedInUser', JSON.stringify(user));
-      setUser(user);
-      setToken(user.token);
-      setIsLoading(false);
-      setNotification({
-        message: `${user.name} was successfully logged in`,
-        error: 'success',
-      });
-    } catch (error) {
-      setIsLoading(false);
-      setNotification({ message: 'Wrong Credentials', error: 'error' });
-    }
+    dispatch(handleUserLogin(data));
   };
 
-  const handleLogout = (event) => {
-    event.preventDefault();
-    if (window.confirm('Are you sure you want to log out?')) {
-      window.localStorage.removeItem('loggedInUser');
-      setUser(null);
-      setNotification({ message: 'Logout was successful', error: 'success' });
-    }
+  const handleLogout = () => {
+    dispatch(handleUserLogout());
   };
 
-  const handleNewBlog = async (data) => {
-    try {
-      setIsLoading(true);
-      await createBlog(data);
-      await fetchNewData();
-      setIsLoading(false);
-      setNotification({
-        message: `The blog "${data.title}" was successfully added to the list`,
-        error: 'success',
-      });
-    } catch (error) {
-      setIsLoading(false);
-      window.alert('Unknown Error');
-    }
+  const handleNewBlog = (data) => {
+    dispatch(newBlog(data));
   };
 
-  const handleLike = async (likedBlog) => {
-    likedBlog.likes++;
-    try {
-      setIsLoading(true);
-      await updateBlog(likedBlog);
-      await fetchNewData();
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      window.alert('Unknown Error');
-    }
+  const handleLike = (likedBlog) => {
+    const newBlog = { ...likedBlog, likes: likedBlog.likes + 1 };
+    dispatch(likeBlog(newBlog));
   };
 
-  const handleDeleteBlog = async (id) => {
-    try {
-      if (window.confirm('Are you sure that you want to delete this blog?')) {
-        setIsLoading(true);
-        await deleteBlog(id);
-        await fetchNewData();
-        setIsLoading(false);
-        setNotification({ message: 'Blog was successfully deleted', error: 'success' });
-      }
-    } catch (error) {
-      setIsLoading(false);
-      window.alert('Unknown Error');
-    }
+  const handleDeleteBlog = (id) => {
+    dispatch(destroyBlog(id));
   };
 
   /* ---------- useRef ---------- */
@@ -130,7 +59,7 @@ const App = () => {
     return (
       <div>
         <h2>log in to application</h2>
-        <Loading isLoading={isLoading}>
+        <Loading>
           <Notification notification={notification} />
           <LoginForm onLogin={handleLogin} />
         </Loading>
@@ -142,7 +71,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
 
-      <Loading isLoading={isLoading}>
+      <Loading>
         <Notification notification={notification} />
 
         <span>{user.name} logged in </span>
@@ -159,7 +88,7 @@ const App = () => {
         </Togglable>
 
         <div style={{ marginTop: '10px' }}>
-          {blogs
+          {[...blogList]
             .sort((a, b) => b.likes - a.likes)
             .map((blog) => (
               <Blog

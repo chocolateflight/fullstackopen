@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Togglable from './Togglable';
 
 const Blog = (props) => {
@@ -12,11 +12,6 @@ const Blog = (props) => {
   };
 
   const viewDetailsRef = useRef();
-  const [likes, setLikes] = useState(props.blog.likes);
-
-  useEffect(() => {
-    setLikes(props.blog.likes);
-  }, [props.blog.likes]);
 
   const addLikeHandler = () => {
     props.onLike(props.blog);
@@ -39,7 +34,7 @@ const Blog = (props) => {
           <div className='blog-details'>
             <div>URL: {props.blog.url}</div>
             <div>
-              <span>Likes: {likes} </span>
+              <span>Likes: {props.blog.likes} </span>
               <button onClick={addLikeHandler} className='btn-like' id='btn-like'>
                 Like
               </button>
