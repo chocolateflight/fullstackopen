@@ -1,13 +1,23 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes, Link } from 'react-router-dom';
+
 import Blog from './components/Blog';
 import LoginForm from './components/LoginForm';
 import NewBlog from './components/NewBlog';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
 import Togglable from './components/Togglable';
+import Users from './components/Users';
+import UserView from './components/UserView';
+
 import { initializeBlogs, newBlog, likeBlog, destroyBlog } from './features/blogSlice';
-import { handleUserLogin, initializeUser, handleUserLogout } from './features/userSlice';
+import {
+  handleUserLogin,
+  initializeUser,
+  handleUserLogout,
+  getAllUsers,
+} from './features/userSlice';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +35,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeUser());
+    dispatch(getAllUsers());
   }, []);
 
   /* ---------- Event Handlers ---------- */
@@ -67,40 +78,52 @@ const App = () => {
     );
   }
 
+  const main = (
+    <Loading>
+      <Togglable
+        showButtonLabel='Create new note'
+        hideButtonLabel='Cancel'
+        ref={loginFormRef}>
+        <NewBlog onNewBlog={handleNewBlog} />
+      </Togglable>
+
+      <div style={{ marginTop: '10px' }}>
+        {[...blogList]
+          .sort((a, b) => b.likes - a.likes)
+          .map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              user={user}
+              onLike={handleLike}
+              onDelete={handleDeleteBlog}
+            />
+          ))}
+      </div>
+    </Loading>
+  );
+
   return (
     <div>
-      <h2>blogs</h2>
+      <Link to='/'>
+        <h2>blogs</h2>
+      </Link>
+      <Notification notification={notification} />
+      <span>{user.name} logged in </span>
 
-      <Loading>
-        <Notification notification={notification} />
+      <button style={{ marginBottom: '20px' }} onClick={handleLogout}>
+        Logout
+      </button>
 
-        <span>{user.name} logged in </span>
-
-        <button style={{ marginBottom: '20px' }} onClick={handleLogout}>
-          Logout
-        </button>
-
-        <Togglable
-          showButtonLabel='Create new note'
-          hideButtonLabel='Cancel'
-          ref={loginFormRef}>
-          <NewBlog onNewBlog={handleNewBlog} />
-        </Togglable>
-
-        <div style={{ marginTop: '10px' }}>
-          {[...blogList]
-            .sort((a, b) => b.likes - a.likes)
-            .map((blog) => (
-              <Blog
-                key={blog.id}
-                blog={blog}
-                user={user}
-                onLike={handleLike}
-                onDelete={handleDeleteBlog}
-              />
-            ))}
-        </div>
-      </Loading>
+      <Routes>
+        <Route path='/' element={main} />
+        <Route path='/users' element={<Users />} />
+        <Route
+          path='/users/:id'
+          // element={detailedUser ? <UserView /> : <Navigate replace to='/' />}
+          element={<UserView />}
+        />
+      </Routes>
     </div>
   );
 };

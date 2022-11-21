@@ -3,9 +3,11 @@ import { setToken } from '../services/blogs';
 import { setNotification } from './notificationSlice';
 import { toggleLoading } from './loadingSlice';
 import { login } from '../services/logins';
+import { getUsers } from '../services/users';
 
 const initialState = {
   user: null,
+  allUsers: null,
 };
 
 const userSlice = createSlice({
@@ -18,10 +20,13 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
     },
+    setAllUsers: (state, action) => {
+      state.allUsers = action.payload;
+    },
   },
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, setAllUsers,  } = userSlice.actions;
 
 export const initializeUser = () => {
   return async (dispatch) => {
@@ -64,6 +69,15 @@ export const handleUserLogout = () => {
       dispatch(logoutUser());
       dispatch(setNotification({ message: 'Logout was successful', error: 'success' }));
     }
+  };
+};
+
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    dispatch(toggleLoading(true));
+    const users = await getUsers();
+    dispatch(toggleLoading(false));
+    dispatch(setAllUsers(users));
   };
 };
 
