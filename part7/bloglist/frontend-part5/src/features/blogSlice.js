@@ -48,7 +48,7 @@ export const newBlog = (content) => {
   };
 };
 
-export const likeBlog = (content) => {
+export const blogUpdate = (content) => {
   return async (dispatch) => {
     try {
       dispatch(toggleLoading(true));

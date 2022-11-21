@@ -36,6 +36,7 @@ blogsRouter.post(
       url: body.url,
       user: user,
       likes: body.likes,
+      comments: [],
     });
 
     if (!blog.likes) {
@@ -93,6 +94,7 @@ blogsRouter.put(
       url: request.body.url,
       user: oldBlog.user,
       likes: request.body.likes,
+      comments: request.body.comments,
     };
 
     if (!oldBlog) {
@@ -109,6 +111,14 @@ blogsRouter.put(
     });
 
     if (differences.length === 1 && differences[0] === 'likes') {
+      const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, newBlog, {
+        new: true,
+        runValidators: true,
+        context: 'query',
+      });
+
+      response.json(updatedBlog.toJSON());
+    } else if (differences.length === 1 && differences[0] === 'comments') {
       const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, newBlog, {
         new: true,
         runValidators: true,

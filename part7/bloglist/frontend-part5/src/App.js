@@ -12,7 +12,7 @@ import Users from './components/Users';
 import UserView from './components/UserView';
 import BlogView from './components/BlogView';
 
-import { initializeBlogs, newBlog, likeBlog, destroyBlog } from './features/blogSlice';
+import { initializeBlogs, newBlog, blogUpdate, destroyBlog } from './features/blogSlice';
 import {
   handleUserLogin,
   initializeUser,
@@ -55,7 +55,12 @@ const App = () => {
 
   const handleLike = (likedBlog) => {
     const newBlog = { ...likedBlog, likes: likedBlog.likes + 1 };
-    dispatch(likeBlog(newBlog));
+    dispatch(blogUpdate(newBlog));
+  };
+
+  const handleComment = (commentedBlog, comment) => {
+    const newBlog = { ...commentedBlog, comments: [...commentedBlog.comments, comment] };
+    dispatch(blogUpdate(newBlog));
   };
 
   const handleDeleteBlog = (id) => {
@@ -135,7 +140,10 @@ const App = () => {
         <Route path='/' element={main} />
         <Route path='/users' element={<Users />} />
         <Route path='/users/:id' element={<UserView />} />
-        <Route path='/blogs/:id' element={<BlogView onLike={handleLike} />} />
+        <Route
+          path='/blogs/:id'
+          element={<BlogView onLike={handleLike} onComment={handleComment} />}
+        />
       </Routes>
     </div>
   );

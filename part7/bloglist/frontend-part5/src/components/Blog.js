@@ -43,8 +43,12 @@ const Blog = (props) => {
               </button>
             </div>
             <div>Author: {props.blog.author}</div>
+            <div>Comments: {props.blog.comments.length}</div>
             {props.blog.user.username === props.user.username ? (
-              <button id='btn-remove' onClick={deleteHandler}>
+              <button
+                style={{ marginTop: '5px' }}
+                id='btn-remove'
+                onClick={deleteHandler}>
                 Remove
               </button>
             ) : null}

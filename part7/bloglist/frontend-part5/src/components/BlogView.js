@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useMatch } from 'react-router-dom';
 
@@ -9,6 +9,8 @@ const BlogView = (props) => {
   const match = useMatch('/blogs/:id');
   const [detailedBlog, setDetailedBlog] = useState(null);
 
+  const commentInputRef = useRef();
+
   useEffect(() => {
     if (blogList.length !== 0) {
       setDetailedBlog(match ? blogList.find((b) => b.id === match.params.id) : null);
@@ -17,6 +19,12 @@ const BlogView = (props) => {
 
   const addLikeHandler = () => {
     props.onLike(detailedBlog);
+  };
+
+  const submitHandler = () => {
+    const comment = commentInputRef.current.value;
+    props.onComment(detailedBlog, comment);
+    commentInputRef.current.value = '';
   };
 
   if (detailedBlog === null) {
@@ -36,6 +44,21 @@ const BlogView = (props) => {
         Like
       </button>
       <div>Added by: {detailedBlog.user.name}</div>
+      <h2>Comments</h2>
+      <ul>
+        {detailedBlog.comments.length > 0 ? (
+          detailedBlog.comments.map((comment) => <li key={comment}>{comment}</li>)
+        ) : (
+          <li style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+            {'There are no comments yet :('}
+          </li>
+        )}
+      </ul>
+
+      <form onSubmit={submitHandler}>
+        <input ref={commentInputRef} />
+        <button>Add comment</button>
+      </form>
     </>
   );
 };
