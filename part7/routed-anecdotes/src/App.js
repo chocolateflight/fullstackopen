@@ -8,7 +8,7 @@ import {
   CreateNew,
   Anecdote,
   Invalid,
-} from './components/ComponentLibrary';
+} from './component-library/index';
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
