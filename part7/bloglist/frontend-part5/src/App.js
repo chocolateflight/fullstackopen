@@ -10,6 +10,7 @@ import Loading from './components/Loading';
 import Togglable from './components/Togglable';
 import Users from './components/Users';
 import UserView from './components/UserView';
+import BlogView from './components/BlogView';
 
 import { initializeBlogs, newBlog, likeBlog, destroyBlog } from './features/blogSlice';
 import {
@@ -105,24 +106,36 @@ const App = () => {
 
   return (
     <div>
-      <Link to='/'>
-        <h2>blogs</h2>
-      </Link>
+      <div
+        style={{
+          backgroundColor: 'lightgrey',
+          paddingTop: '10px',
+          paddingBottom: '10px',
+        }}>
+        <span style={{ marginRight: '5px' }}>
+          <Link to={'/'}>blogs</Link>
+        </span>
+        <span style={{ marginRight: '5px' }}>
+          <Link to={'/users'}>users</Link>
+        </span>
+        <span>{user.name} logged in </span>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+
+      <h2>blogs</h2>
+
       <Notification notification={notification} />
-      <span>{user.name} logged in </span>
+      {/* <span>{user.name} logged in </span>
 
       <button style={{ marginBottom: '20px' }} onClick={handleLogout}>
         Logout
-      </button>
+      </button> */}
 
       <Routes>
         <Route path='/' element={main} />
         <Route path='/users' element={<Users />} />
-        <Route
-          path='/users/:id'
-          // element={detailedUser ? <UserView /> : <Navigate replace to='/' />}
-          element={<UserView />}
-        />
+        <Route path='/users/:id' element={<UserView />} />
+        <Route path='/blogs/:id' element={<BlogView onLike={handleLike} />} />
       </Routes>
     </div>
   );

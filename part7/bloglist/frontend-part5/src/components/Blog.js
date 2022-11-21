@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Togglable from './Togglable';
 
 const Blog = (props) => {
@@ -24,9 +25,11 @@ const Blog = (props) => {
   return (
     <div style={blogStyle} className='blog'>
       <div>
-        <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>
-          {props.blog.title}
-        </span>
+        <Link to={`/blogs/${props.blog.id}`}>
+          <span style={{ fontStyle: 'italic', fontWeight: 'bold' }}>
+            {props.blog.title}
+          </span>
+        </Link>
         <span> by {props.blog.author}</span>
       </div>
       <span>

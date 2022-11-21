@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   notification: {
     message: null,
-    error: null
-  }
+    error: null,
+  },
 };
 
 const notificationSlice = createSlice({

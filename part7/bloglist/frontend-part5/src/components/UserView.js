@@ -18,12 +18,18 @@ const UserView = () => {
     return <Loading></Loading>;
   }
 
+  if (detailedUser === undefined) {
+    return <div>Invalid User</div>;
+  }
+
   return (
     <>
       <h2>{detailedUser.name}</h2>
       <h3>added blogs</h3>
       <ul>
-        {detailedUser.blogs.map((blog) => <li key={blog.id}>{blog.title}</li>)}
+        {detailedUser.blogs.map((blog) => (
+          <li key={blog.id}>{blog.title}</li>
+        ))}
       </ul>
     </>
   );

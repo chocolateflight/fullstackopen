@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toggleLoading } from './loadingSlice';
 import { setNotification } from './notificationSlice';
-import {
-  getAllBlogs,
-  createBlog,
-  updateBlog,
-  deleteBlog,
-} from '../services/blogs';
+import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../services/blogs';
 
 const initialState = {
   blogList: [],
