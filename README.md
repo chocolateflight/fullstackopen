@@ -2,7 +2,17 @@
 
 This course, which is a deep dive into modern web development, introduces modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js, Redux, MongoDB, GraphQL and Typescript. This is the repository where I store my submissions.
 
-## Part 0 - Fundamentals of Web Apps
+This repository serves as a collection of my submitted solutions for the course exercises.
+
+## Certificate
+
+I have successfully completed Parts 0 to 7 of the course.
+
+![Certificate of Completion](https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/0a1f92d2c5039971a56f0c5a51f387db)
+
+Parts 8 to 13 are WIP.
+
+## Part 0 - Fundamentals of Web Apps!
 
 This part is an overall introduction to the course, focussing on HTTP requests, the DOM and how web apps generally work.
 
