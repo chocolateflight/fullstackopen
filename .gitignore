@@ -20,6 +20,9 @@
 /part7/bloglist/backend-part4/node_modules
 /part7/bloglist/frontend-part5/node_modules
 /part7/ultimate-hooks/node_modules
+/part8/8_1/node_modules
+/part8/library/library-backend/node_modules
+/part8/library/library-frontend/node_modules
 /.pnp
 .pnp.js
 
