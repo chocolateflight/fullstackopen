@@ -23,6 +23,7 @@
 /part8/8_1/node_modules
 /part8/library/library-backend/node_modules
 /part8/library/library-frontend/node_modules
+/part8/8_1/training
 /.pnp
 .pnp.js
 
